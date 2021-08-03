@@ -1,0 +1,12 @@
+server:
+    port: 2021
+spring:
+    datasource:
+        driverClassName: oracle.jdbc.OracleDriver
+        password: cat
+        url: jdbc:oracle:thin:@localhost:1521:xe
+        username: cat
+    jpa:
+        hibernate:
+            ddl-auto: update
+        show-sql: true
