@@ -26,7 +26,7 @@ import com.cg.onlineshopping.exceptions.order.UserIdNotFoundException;
 import com.cg.onlineshopping.services.IOrderService;
 
 @RestController
-@RequestMapping("/orders")
+//@RequestMapping("/orders")
 public class OrderController {
 	
 	

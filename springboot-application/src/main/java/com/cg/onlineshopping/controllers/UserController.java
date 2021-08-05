@@ -41,11 +41,11 @@ public class UserController {
 	public static int logValidator = 0;
 	public static String UserType = "";
 	
-//	@GetMapping("/allusers")
-//	public List<User> RetrieveAllUsers()
-//	{
-//		return uss.ViewAllUsers();
-//	}
+	@GetMapping("/allusers")
+	public List<User> RetrieveAllUsers()
+	{
+		return uss.ViewAllUsers();
+	}
 	
 	@GetMapping("/Login/{userId}/{userPassword}")
 	public ResponseEntity<?> loggingUser(@PathVariable("userId") int userID,

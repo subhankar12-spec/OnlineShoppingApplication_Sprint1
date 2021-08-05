@@ -15,8 +15,8 @@ public interface IProductService {
 	public ResponseEntity<Product> addProduct(Product product);
 	
 	public ResponseEntity<List<Product>> viewAllProducts();
-	public ResponseEntity<Product> viewProductById(String id);
+	public ResponseEntity<Product> viewProductById(int id);
 	public ResponseEntity<List<Product>> viewProductsByCategory(String cat); 
-	public ResponseEntity<Product> updateProduct(String productId,Product product);
-	public ResponseEntity<HttpStatus> removeProduct(String prodid);
+	public ResponseEntity<Product> updateProduct(int productId,Product product);
+	public ResponseEntity<HttpStatus> removeProduct(int prodid);
 }

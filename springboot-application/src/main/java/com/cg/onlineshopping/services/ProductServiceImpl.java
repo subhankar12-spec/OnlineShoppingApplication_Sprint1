@@ -49,7 +49,7 @@ public class ProductServiceImpl implements IProductService{
 	}
 	
 	@Override
-	public ResponseEntity<Product> viewProductById(String id) {
+	public ResponseEntity<Product> viewProductById(int id) {
 	    Optional<Product> productData = iproductRepository.findById(id);
 
 	    if(productData.isPresent()) {
@@ -71,7 +71,7 @@ public class ProductServiceImpl implements IProductService{
 	  }
 	
 	@Override
-	public ResponseEntity<Product> updateProduct(String id,Product product) {
+	public ResponseEntity<Product> updateProduct(int id,Product product) {
 	    Optional<Product> productData = iproductRepository.findById(id);
 
 	    if (productData.isPresent()) {
@@ -92,7 +92,7 @@ public class ProductServiceImpl implements IProductService{
 	  }
 	
 	@Override
-	public ResponseEntity<HttpStatus> removeProduct(String id) {
+	public ResponseEntity<HttpStatus> removeProduct(int id) {
 	    try {
 	    	iproductRepository.deleteById(id);
 	      return new ResponseEntity<>(HttpStatus.NO_CONTENT);

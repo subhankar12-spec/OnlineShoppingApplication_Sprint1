@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.cg.onlineshopping.entities.Product;
 
 @Repository
-public interface IProductRepository extends JpaRepository<Product,String>{
+public interface IProductRepository extends JpaRepository<Product,Integer>{
 	
 	public List<Product> findByCategoryIgnoreCase(String cat);
 	

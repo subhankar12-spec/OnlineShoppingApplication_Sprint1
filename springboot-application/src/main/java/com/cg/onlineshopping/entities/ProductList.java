@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import lombok.Builder;
 
 @Builder
@@ -20,59 +22,63 @@ public class ProductList {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="List_Id")
-	private Long listId;
+	private long listId;
 	@Column(name="ProductName")
 	private String productName;
 	@Column(name="Quantity")
 	private int quantity;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="Fk_prod_id")
-	private Product product;
-
-	public Long getListId() {
-		return listId;
-	}
-
-	public void setListId(Long listId) {
-		this.listId = listId;
-	}
-
-	public String getProductName() {
-		return productName;
-	}
-
-	public void setProductName(String productName) {
-		this.productName = productName;
-	}
-
-	public int getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
-
-	public Product getProduct() {
-		return product;
-	}
-
-	public void setProduct(Product product) {
-		this.product = product;
-	}
+//	@ManyToOne(cascade=CascadeType.ALL)
+//	@JoinColumn(name="Fk_prod_id")
+//	private Product product;
 	
-	public ProductList() {
-		
-	}
+	@ManyToOne(targetEntity=Cart.class, cascade=CascadeType.ALL)
+	@JoinColumn(name="fk_Id")
+//	@JsonManagedReference
+	private Cart cart;
 
-	public ProductList(Long listId, String productName, int quantity, Product product) {
-		super();
-		this.listId = listId;
-		this.productName = productName;
-		this.quantity = quantity;
-		this.product = product;
-	}
+public ProductList(long listId, String productName, int quantity, com.cg.onlineshopping.entities.Cart cart) {
+	super();
+	this.listId = listId;
+	this.productName = productName;
+	this.quantity = quantity;
+	this.cart = cart;
+}
+
+public long getListId() {
+	return listId;
+}
+
+public void setListId(long listId) {
+	this.listId = listId;
+}
+
+public String getProductName() {
+	return productName;
+}
+
+public void setProductName(String productName) {
+	this.productName = productName;
+}
+
+public int getQuantity() {
+	return quantity;
+}
+
+public void setQuantity(int quantity) {
+	this.quantity = quantity;
+}
+
+public Cart getCart() {
+	return cart;
+}
+
+public void setCart(Cart cart) {
+	this.cart = cart;
+}
+
+
+
 	
 	
 	

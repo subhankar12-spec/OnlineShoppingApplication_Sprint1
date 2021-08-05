@@ -15,9 +15,9 @@ import javax.persistence.Table;
 public class Product {
 
 	@Id
-	//@Column(name="PRODUCT_ID")
-	//@GeneratedValue(strategy=GenerationType.AUTO)
-	private String productId;
+	@Column(name="PRODUCT_ID")
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int productId;
 	
 	@Column(name="PRODUCT_NAME")
 	private String productName;
@@ -29,7 +29,7 @@ public class Product {
 	private String category;
 	
 	@Column(name="PRICE")
-	private double price;
+	private int price;
 	
 	@Column(name="COLOR")
 	private String color;
@@ -51,7 +51,7 @@ public class Product {
 	
 	
 
-	public Product(String productId,String productName, String brandName, String category, double price, String color,
+	public Product(int productId,String productName, String brandName, String category, int price, String color,
 			String specification, int quantity, int userRatings) {
 		//super();
 		this.productId = productId;
@@ -68,11 +68,11 @@ public class Product {
 
 
 
-	public String getProductId() {
+	public int getProductId() {
 		return productId;
 	}
 
-	public void setProductId(String productId) {
+	public void setProductId(int productId) {
 		this.productId = productId;
 	}
 
@@ -100,11 +100,11 @@ public class Product {
 		this.category = category;
 	}
 
-	public double getPrice() {
+	public int getPrice() {
 		return price;
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
 

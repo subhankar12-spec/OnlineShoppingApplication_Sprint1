@@ -32,9 +32,9 @@ public class IOrderServiceImplementation implements IOrderService{
 public Order updateOrder(Long id,Order order){
     	
     	Order o = repo.findById(id).get();
-    	if (Objects.nonNull(order.getUserName()) && !"".equalsIgnoreCase(order.getUserName())) {
-			o.setUserName(order.getUserName());
-		}
+//    	if (Objects.nonNull(order.getUserName()) && !"".equalsIgnoreCase(order.getUserName())) {
+//			o.setUserName(order.getUserName());
+//		}
 
     	if (Objects.nonNull(order.getOrderStatus()) && !"".equalsIgnoreCase(order.getOrderStatus())) {
 			o.setOrderStatus(order.getOrderStatus());

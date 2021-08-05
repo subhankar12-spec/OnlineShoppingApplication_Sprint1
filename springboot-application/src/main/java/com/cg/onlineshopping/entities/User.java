@@ -19,7 +19,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 @Entity
 //@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@Builder
+//@Builder
 @Table(name="USERS")
 public class User {
 
@@ -27,31 +27,31 @@ public class User {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="UserId")
 	private int userID;
-	@Column(name="Username")
-	private String username;
+//	@Column(name="Username")
+//	private String username;
 	@Column(name="Password")
 	private String userPassword;
 	@Column(name="Role")
 	private String role;
 	@Column(name="Email")
 	private String email;
-	@OneToOne(targetEntity=Customer.class,cascade= CascadeType.ALL)
-	@JoinColumn(name="Cp_fk", referencedColumnName="CustID")
-	@JsonBackReference
-	private Customer cust;
-	
+//	@OneToOne(targetEntity=Customer.class,cascade= CascadeType.DETACH)
+//	@JoinColumn(name="Cp_fk", referencedColumnName="CustID")
+//	@JsonBackReference
+//	private Customer cust;
+//	
 	public User() {
 		
 	}
 
-	public User(int userID, String username, String userPassword, String role, String email, Customer cust) {
+	public User(int userID, String userPassword, String role, String email, Customer cust) {
 		super();
 		this.userID = userID;
-		this.username = username;
+//		this.username = username;
 		this.userPassword = userPassword;
 		this.role = role;
 		this.email = email;
-		this.cust = cust;
+//		this.cust = cust;
 	}
 
 	public int getUserID() {
@@ -62,13 +62,13 @@ public class User {
 		this.userID = userID;
 	}
 
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
+//	public String getUsername() {
+//		return username;
+//	}
+//
+//	public void setUsername(String username) {
+//		this.username = username;
+//	}
 
 	public String getUserPassword() {
 		return userPassword;
@@ -93,13 +93,13 @@ public class User {
 		this.email = email;
 	}
 
-	public Customer getCust() {
-		return cust;
-	}
-
-	public void setCust(Customer cust) {
-		this.cust = cust;
-	}
-	
+//	public Customer getCust() {
+//		return cust;
+//	}
+//
+//	public void setCust(Customer cust) {
+//		this.cust = cust;
+//	}
+//	
 
 }	

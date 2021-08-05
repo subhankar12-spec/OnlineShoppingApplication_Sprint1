@@ -43,12 +43,12 @@ public class Customer {
 	private String mobileNumber;
 	@Column(name="Status")
 	private String status; // active or deactivated
-	@OneToMany(targetEntity=Address.class,cascade= CascadeType.ALL,fetch=FetchType.EAGER)
+	@OneToMany(targetEntity=Address.class,cascade= CascadeType.ALL)//,fetch=FetchType.EAGER)
 	@JoinColumn(name="Cp_fk")//, referencedColumnName="CustID")
 	private List<Address> address;
-	@OneToOne(targetEntity=User.class,cascade= CascadeType.ALL)
+	@OneToOne(targetEntity=User.class,cascade= CascadeType.DETACH)
 	@JoinColumn(name="Cust_fk")//, referencedColumnName="UserID")
-	@JsonManagedReference
+//	@JsonManagedReference
 	private User user;
 	
 	public Customer() {

@@ -16,7 +16,7 @@ import javax.persistence.Table;
 
 import lombok.Builder;
 
-@Builder
+//@Builder
 @Entity
 @Table(name="ORDERS")
 public class Order {
@@ -24,9 +24,9 @@ public class Order {
 	@Id
     @Column(name="ORDER_ID")
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private Long orderId;
-    @Column(name="USERNAME")
-    private String userName;
+    private long orderId;
+//    @Column(name="USERNAME")
+//    private String userName;
     @Column(name="ORDER_STATUS")
     private String orderStatus; // registered , dispatched , delievered
     @Column(name="ORDER_DATE")
@@ -34,16 +34,16 @@ public class Order {
     @Column(name="TOTAL_AMOUNT")
     private int totalAmount;
     
-    @ManyToOne(cascade=CascadeType.ALL) //(targetEntity=Customer.class,cascade=CascadeType.ALL)
+    @ManyToOne(cascade=CascadeType.MERGE) //(targetEntity=Customer.class,cascade=CascadeType.ALL)
     @JoinColumn(name="CUST_ID")
     private Customer customer;
     
     
-    @OneToMany(/*targetEntity=ProductList.class,*/cascade=CascadeType.ALL)
-    @JoinColumn(name="Fk_List_Id")
+    @OneToMany(targetEntity=ProductList.class,cascade=CascadeType.ALL)
+    @JoinColumn(name="Fk_ORDER_ID")
     private List<ProductList> productList;//(product name and product quantity
    
-    @ManyToOne(cascade=CascadeType.ALL) //(targetEntity=Customer.class,cascade=CascadeType.ALL)
+    @ManyToOne(cascade=CascadeType.MERGE) //(targetEntity=Customer.class,cascade=CascadeType.ALL)
     @JoinColumn(name="Add_ID")
      private Address address;
    
@@ -57,12 +57,12 @@ public class Order {
  	public void setOrderId(Long orderId) {
  		this.orderId = orderId;
  	}
- 	public String getUserName() {
- 		return userName;
- 	}
- 	public void setUserName(String userName) {
- 		this.userName = userName;
- 	}
+// 	public String getUserName() {
+// 		return userName;
+// 	}
+// 	public void setUserName(String userName) {
+// 		this.userName = userName;
+// 	}
  	public String getOrderStatus() {
  		return orderStatus;
  	}
@@ -105,11 +105,11 @@ public class Order {
 	public void setProductList(List<ProductList> productList) {
 		this.productList = productList;
 	}
-	public Order(Long orderId, String userName, String orderStatus, LocalDate orderDate, int totalAmount,
+	public Order(Long orderId, String orderStatus, LocalDate orderDate, int totalAmount,
 			Customer customer, List<ProductList> productList, Address address) {
 		super();
 		this.orderId = orderId;
-		this.userName = userName;
+//		this.userName = userName;
 		this.orderStatus = orderStatus;
 		this.orderDate = orderDate;
 		this.totalAmount = totalAmount;

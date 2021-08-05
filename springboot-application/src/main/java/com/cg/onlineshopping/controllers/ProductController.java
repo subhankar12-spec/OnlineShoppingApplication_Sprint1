@@ -25,7 +25,7 @@ import com.cg.onlineshopping.services.IProductService;
 
 //@CrossOrigin(origins = "http://localhost:8081")
 @RestController
-@RequestMapping("/products")
+//@RequestMapping("/products")
 public class ProductController {
 	
 //	@Autowired
@@ -91,7 +91,7 @@ public class ProductController {
 //	  }
 	 
 	 @GetMapping("/product/{id}")
-	  public ResponseEntity<Product> viewProductById(@PathVariable("id")String id) {
+	  public ResponseEntity<Product> viewProductById(@PathVariable("id")int id) {
 	    return iproductService.viewProductById(id);
 	  }
 	  
@@ -134,7 +134,7 @@ public class ProductController {
 //	  }
 	 
 	 @PutMapping("/product/{id}")
-	  public ResponseEntity<Product> updateProduct(@PathVariable("id") String id, @RequestBody Product product) {
+	  public ResponseEntity<Product> updateProduct(@PathVariable("id") int id, @RequestBody Product product) {
 	    return iproductService.updateProduct(id, product);
 	  }
 
@@ -149,7 +149,7 @@ public class ProductController {
 //	  }
 	 
 	 @DeleteMapping("/product/{id}")
-	  public ResponseEntity<HttpStatus> removeProduct(@PathVariable("id") String id) {
+	  public ResponseEntity<HttpStatus> removeProduct(@PathVariable("id") int id) {
 	    return iproductService.removeProduct(id);
 	  }
 
