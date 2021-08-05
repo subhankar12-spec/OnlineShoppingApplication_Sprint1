@@ -16,13 +16,12 @@
 //import org.springframework.boot.test.context.SpringBootTest;
 //import org.springframework.boot.test.mock.mockito.MockBean;
 //
-//import com.cg.onlineshopping.controllers.UserIdNotFoundException;
 //import com.cg.onlineshopping.entities.Address;
 //import com.cg.onlineshopping.entities.Customer;
 //import com.cg.onlineshopping.entities.Order;
-//import com.cg.onlineshopping.exceptions.DateNotFoundException;
-//import com.cg.onlineshopping.exceptions.LocationNotFoundException;
-//import com.cg.onlineshopping.exceptions.OrderNotFoundException;
+//import com.cg.onlineshopping.exceptions.order.DateNotFoundException;
+//import com.cg.onlineshopping.exceptions.order.LocationNotFoundException;
+//import com.cg.onlineshopping.exceptions.order.OrderNotFoundException;
 //import com.cg.onlineshopping.repositories.IOrderRepository;
 //import com.cg.onlineshopping.services.IOrderServiceImplementation;
 //

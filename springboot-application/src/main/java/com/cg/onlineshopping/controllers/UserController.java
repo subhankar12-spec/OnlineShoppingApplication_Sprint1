@@ -25,7 +25,6 @@ import com.cg.onlineshopping.services.ICustomerService;
 import com.cg.onlineshopping.services.IUserService;
 
 
-//import com.cg.onlineshopping.entities.Customer;
 @RestController
 //@RequestMapping(value="/users")
 public class UserController {
@@ -36,26 +35,64 @@ public class UserController {
 	private ICustomerService Cust;
 	@Autowired
 	private IAddressService adds;
+//	@Autowired
+//	private ILogInService log;
 	
-//	@PostMapping("/add/user")
-//	public ResponseEntity<User> createUser( @RequestBody User user)
+	public static int logValidator = 0;
+	public static String UserType = "";
+	
+//	@GetMapping("/allusers")
+//	public List<User> RetrieveAllUsers()
 //	{
-//		User savedUser=uss.addUser(user);
-//		return new ResponseEntity<>(savedUser,HttpStatus.CREATED);
-//	}
-//		URI loc= ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedUser.getUsername()).toUri();
-//		return ResponseEntity.created(loc).build();
-//	}
-//	@PostMapping("/adduser")
-//	public User createUser(@RequestBody User user)
-//	{
-//		return uss.addUser(user);
+//		return uss.ViewAllUsers();
 //	}
 	
-	@GetMapping("/allusers")
-	public List<User> RetrieveAllUsers()
-	{
-		return uss.ViewAllUsers();
+	@GetMapping("/Login/{userId}/{userPassword}")
+	public ResponseEntity<?> loggingUser(@PathVariable("userId") int userID,
+			@PathVariable("userPassword") String userPassword) throws UserNotFoundException {
+		boolean value = uss.loginDetails(userID, userPassword);
+		if (value == true) {
+			//logValidator = 1;
+			String UserType = uss.ViewUser(userID).getRole();
+			if(UserType=="Admin") {
+				logValidator = 1;
+				return ResponseEntity.ok("Logged In As "+UserType);
+			}
+			else {
+				logValidator = 2;
+				return ResponseEntity.ok("Logged In As "+UserType);
+			}
+			//return ResponseEntity.ok("Logged In");
+		} else
+			return ResponseEntity.ok("Invalid Credentials");
+	}
+
+	@GetMapping("/Logout")
+	public ResponseEntity<?> logOutUser() {
+		logValidator = 0;
+		UserType = "";
+		return ResponseEntity.ok("Logged Out");
+	}
+	
+	@PostMapping("/addUser")
+	public ResponseEntity<?> addUser(@RequestBody User user) throws UserNotFoundException {
+		uss.validateUser(user);
+		//System.out.println(user);
+		User userdb = uss.addUser(user);
+		//return ResponseEntity.ok(userdb);
+		return new ResponseEntity<>(userdb,HttpStatus.CREATED);
+	}
+	
+	@GetMapping("/viewallUsers")
+	public ResponseEntity<?> viewUser() {
+		if (logValidator == 1) {
+			if (UserType.equalsIgnoreCase("admin")) {
+				List<User> list = uss.ViewAllUsers();
+				return ResponseEntity.ok(list);
+			} else
+				return ResponseEntity.ok("You don't have admin privileges");
+		} else
+			return ResponseEntity.ok("You have not logged in yet");
 	}
 	
 	@GetMapping("/allcustomers")
@@ -64,18 +101,14 @@ public class UserController {
 		return Cust.ViewAllCustomers();
 	}
 	
+	
+	
 	@GetMapping("/customer/{id}")
 	public Customer RetrieveCustomer(@PathVariable("id") int id) throws CustomerNotFoundException
 	{
 		return Cust.viewCustomer(id);
 	}
 	
-//	@GetMapping("/customer/{status}")
-//	public List<Customer> RetrieveDeactivatedCust(@PathVariable("status") String status)
-//	{
-//			return (Cust.deActivateCustomer(status));
-//		
-//	}
 	
 	@GetMapping("/alladdress")
 	public List<Address> RetrieveAllAddress()
@@ -89,13 +122,6 @@ public class UserController {
 		return adds.viewAddress(id);
 	}
 	
-//	@PostMapping("/add/customer")
-//	public ResponseEntity<Object> createCustomer( @RequestBody Customer csr)
-//	{
-//		Customer savedCsr=Cust.addCustomer(csr);
-//		URI loc= ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedCsr.getCustomerId()).toUri();
-//		return ResponseEntity.created(loc).build();
-//	}
 	
 	@PostMapping("/addcustomer")
 	public ResponseEntity<Customer> createCustomer (@RequestBody Customer csr)
@@ -116,13 +142,6 @@ public class UserController {
 		adds.removeAddress(id);
 	}
 	
-//	@PostMapping("/add/address")
-//	public ResponseEntity<Object> createAddress( @RequestBody Address addr)
-//	{
-//		Address savedAddr=adds.AddAddress(addr);
-//		URI loc= ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedAddr.getAddressId()).toUri();
-//		return ResponseEntity.created(loc).build();
-//	}
 	
 	@PostMapping("/addaddress")
 	public ResponseEntity<Address> createAddress(@RequestBody Address addr)
@@ -148,5 +167,7 @@ public class UserController {
 	{
 		return uss.updateUserProfile(id,user);
 	}
+	
+	
 
 }

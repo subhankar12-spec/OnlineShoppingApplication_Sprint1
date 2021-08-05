@@ -17,6 +17,29 @@ public interface ICustomerService {
 	public Customer viewCustomer(int customerId) throws CustomerNotFoundException;
 	public List<Customer> ViewAllCustomers();
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 //	public List<Customer> deActivateCustomer(String status);
 	
 	

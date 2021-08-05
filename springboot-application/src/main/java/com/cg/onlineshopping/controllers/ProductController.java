@@ -25,7 +25,7 @@ import com.cg.onlineshopping.services.IProductService;
 
 //@CrossOrigin(origins = "http://localhost:8081")
 @RestController
-//@RequestMapping("/online")
+@RequestMapping("/products")
 public class ProductController {
 	
 //	@Autowired

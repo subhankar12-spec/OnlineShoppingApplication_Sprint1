@@ -30,11 +30,11 @@ public class User {
 	@Column(name="Username")
 	private String username;
 	@Column(name="Password")
-	private String password;
+	private String userPassword;
 	@Column(name="Role")
 	private String role;
-//	@Column(name="Email")
-//	private String email;
+	@Column(name="Email")
+	private String email;
 	@OneToOne(targetEntity=Customer.class,cascade= CascadeType.ALL)
 	@JoinColumn(name="Cp_fk", referencedColumnName="CustID")
 	@JsonBackReference
@@ -44,12 +44,13 @@ public class User {
 		
 	}
 
-	public User(int userID, String username, String password, String role, Customer cust) {
+	public User(int userID, String username, String userPassword, String role, String email, Customer cust) {
 		super();
 		this.userID = userID;
 		this.username = username;
-		this.password = password;
+		this.userPassword = userPassword;
 		this.role = role;
+		this.email = email;
 		this.cust = cust;
 	}
 
@@ -69,20 +70,27 @@ public class User {
 		this.username = username;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getUserPassword() {
+		return userPassword;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setUserPassword(String userPassword) {
+		this.userPassword = userPassword;
 	}
-
 	public String getRole() {
 		return role;
 	}
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public Customer getCust() {
@@ -93,7 +101,5 @@ public class User {
 		this.cust = cust;
 	}
 	
-	
-}
 
-	
+}	

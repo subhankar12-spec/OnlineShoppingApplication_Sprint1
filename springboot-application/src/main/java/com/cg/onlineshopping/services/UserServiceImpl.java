@@ -1,6 +1,10 @@
 package com.cg.onlineshopping.services;
 
+
 import java.util.List;
+import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,11 +21,6 @@ public class UserServiceImpl implements IUserService {
 	@Autowired
 	private IUserRepository repo;
 
-//	@Override
-//	public boolean validateUser(String username, String password) {
-//		// TODO Auto-generated method stub
-//		return false;
-//	}
 	
 	public List<User> ViewAllUsers()
 	{
@@ -30,41 +29,57 @@ public class UserServiceImpl implements IUserService {
 
 	@Override
 	public User addUser(User user) {
-		// TODO Auto-generated method stub
 		return repo.save(user);
 	}
 
 	@Override
 	public User updateUserProfile(int id,User bean) throws UserNotFoundException {
 		
-//		User user = repo.findById(bean.getUserID()).get();
 		User user=repo.findById(id).get();
 		if(user==null)
 		{
 			throw new UserNotFoundException("User Not Present");
 		}
 		else {
-//			user.setUserID(bean.getUserID());
-			user.setUsername(bean.getUsername());
-//			user.setEmail(bean.getEmail());
-			user.setPassword(bean.getPassword());
+			user.setUserPassword(bean.getUserPassword());
 			user.setRole(bean.getRole());	
 		}
-		
-		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	public User ViewUser(int userId) throws UserNotFoundException{
+		User user = repo.findById(userId).orElse(null);
+		if (Objects.isNull(user))
+			throw new UserNotFoundException("No user present with user Id" + userId);
+		return user;
+	}
+	
+	@Override
+	public boolean loginDetails(int userID, String userPassword) {
+		User user = repo.findByUserIDAndUserPassword(userID, userPassword);
+		if (Objects.nonNull(user))
+			return true;
+		else
+			return false;
+	}
 
-//	@Override
-//	public boolean signIn() {
-//		// TODO Auto-generated method stub
-//		return false;
-//	}
-//
-//	@Override
-//	public boolean signOut() {
-//		// TODO Auto-generated method stub
-//		return false;
-//	}
+
+	@Override
+	public void validateUser(User user) throws UserNotFoundException{
+//		String s = String.valueOf(user.getUserPhone());
+//		Pattern p = Pattern.compile("^[1-9]{1}[0-9]{9}$");
+//		Matcher match = p.matcher(s);
+//		if (s.length() != 10 && !match.matches()) {
+//			throw new UserNotFoundException("The Phone Number is invalid.");
+//		}
+
+		String email = user.getEmail();
+		Pattern pattern = Pattern.compile("^[a-zA-Z0-9+]+@[a-zA-Z0-9.-]+$");
+		Matcher m = pattern.matcher(email);
+		if (!m.matches()) {
+			throw new UserNotFoundException("The Email Address is invalid.");
+		}
+	}
 
 }

@@ -1,13 +1,12 @@
 package com.cg.onlineshopping.entities;
 
 
-import java.time.LocalDate;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Builder;
@@ -41,8 +40,8 @@ public class Address {
 	private String country;
 	@Column(name="Pincode")
 	private String pincode;
-//	@ManyToOne
-//	@JoinColumn(name="CustID")
+//	@ManyToOne(mappedBy="customer")
+////	@JoinColumn(name="CustID")
 //	private Customer customer;
 	public int getAddressId() {
 		return addressId;

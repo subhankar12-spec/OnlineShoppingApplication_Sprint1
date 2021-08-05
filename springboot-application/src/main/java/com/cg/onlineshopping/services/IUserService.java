@@ -16,7 +16,11 @@ public interface IUserService {
 //	public boolean signIn();
 //	public boolean signOut();
 //	
+	public User ViewUser(int userId) throws UserNotFoundException;
 	
+	public boolean loginDetails(int userID, String userPassword);
+	
+	public void validateUser(User user) throws UserNotFoundException;
 	// all CURD Operations on User
 
 }

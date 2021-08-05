@@ -9,6 +9,6 @@ import com.cg.onlineshopping.entities.User;
 @Repository
 public interface IUserRepository extends JpaRepository<User,Integer>{
 	
-	
+	public User findByUserIDAndUserPassword(int userID, String userPassword);
 
 }
